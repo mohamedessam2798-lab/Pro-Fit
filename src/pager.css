@@ -1,0 +1,5 @@
+.exercise-pager { display: flex; gap: 10px; margin: 18px 0; }
+.exercise-pager button { flex: 1; border: 1px solid #3a433c; border-radius: 11px; padding: 13px; background: transparent; color: #eaf0e8; font-weight: 800; }
+.exercise-pager button:disabled { opacity: .35; }
+.exercise-pager .next { background: #d9ff3f; border-color: #d9ff3f; color: #152010; }
+.exercise-pager .finish-wide { margin: 0; }

@@ -1,0 +1,5 @@
+{
+  "name": "PRO FIT", "short_name": "PRO FIT", "description": "A fast, focused workout tracker.",
+  "start_url": "/", "display": "standalone", "background_color": "#101313", "theme_color": "#101313",
+  "icons": [{ "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }]
+}
