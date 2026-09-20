@@ -18,3 +18,4 @@ npm run build
 ```
 
 Open the resulting HTTPS site in iPhone Safari, tap **Share**, then **Add to Home Screen**. Data are intentionally local to each browser/device in this MVP.
+pro fit 
