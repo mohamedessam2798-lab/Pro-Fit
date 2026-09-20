@@ -5,4 +5,6 @@ export type ExerciseLog = { exercise: Exercise; sets: SetLog[] };
 export type Workout = { id: string; programId: string; name: string; date: string; exercises: ExerciseLog[] };
 export type Profile = { name: string; photo: string; age: string; bodyWeight: string; targetWeight: string; height: string; goal: string };
 export type WeighIn = { id: string; date: string; weight: number };
-export type AppData = { programs: Program[]; history: Workout[]; profile: Profile; weightHistory: WeighIn[] };
+export type CoachCheckIn = { id: string; date: string; energy: number; sleep: number; soreness: number };
+export type BodyScan = { id: string; date: string; front: string; side: string; back: string };
+export type AppData = { programs: Program[]; history: Workout[]; profile: Profile; weightHistory: WeighIn[]; coachCheckIns: CoachCheckIn[]; bodyScans: BodyScan[] };
