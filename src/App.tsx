@@ -16,6 +16,7 @@ export default function App() {
   const [active, setActive] = useState<Workout | null>(null);
   const [editingProgram, setEditingProgram] = useState<Program | null>(null);
   useEffect(() => saveData(data), [data]);
+  useEffect(() => { document.documentElement.dataset.theme = data.profile.theme || 'dark'; }, [data.profile.theme]);
 
   const startWorkout = (p: Program) => setActive({ id: uid(), programId: p.id, name: p.name, date: new Date().toISOString(), exercises: p.exercises.map(newLog) });
   const lastFor = (exerciseId: string) => data.history.find(w => w.exercises.some(e => e.exercise.id === exerciseId))?.exercises.find(e => e.exercise.id === exerciseId);
@@ -26,7 +27,7 @@ export default function App() {
   if (active) return <WorkoutScreen workout={active} lastFor={lastFor} update={updateActive} finish={finishWorkout} cancel={() => setActive(null)} />;
   if (editingProgram) return <ProgramEditor program={editingProgram} save={(p) => { updatePrograms(data.programs.map(x => x.id === p.id ? p : x)); setEditingProgram(null); }} back={() => setEditingProgram(null)} />;
   return <main className="app">
-    <header><div className="brand"><span className="brand-mark">⌁</span> PRO FIT</div><span className="tag">TRAIN SMART</span></header>
+    <header><div className="brand"><span className="brand-mark">⌁</span> PRO FIT</div><div className="header-actions"><span className="tag">TRAIN SMART</span><button className="theme-toggle" onClick={() => setData(current => ({ ...current, profile: { ...current.profile, theme: current.profile.theme === 'light' ? 'dark' : 'light' } }))} aria-label="Switch color theme">{data.profile.theme === 'light' ? '◐ Dark' : '☀ Light'}</button></div></header>
     {tab === 'home' && <Home programs={data.programs} history={data.history} onStart={startWorkout} onEdit={setEditingProgram} onNew={() => setEditingProgram({ id: uid(), name: 'New workout', exercises: [] })} />}
     {tab === 'coach' && <Coach data={data} onStart={startWorkout} saveCheckIn={(energy, sleep, soreness) => setData(d => ({ ...d, coachCheckIns: [{ id: uid(), date: new Date().toISOString(), energy, sleep, soreness }, ...d.coachCheckIns.filter(item => new Date(item.date).toDateString() !== new Date().toDateString())] }))} saveScan={(scan) => setData(d => ({ ...d, bodyScans: [scan, ...d.bodyScans] }))} />}
     {tab === 'history' && <History history={data.history} />}
