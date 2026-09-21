@@ -12,6 +12,6 @@ export const starterPrograms: Program[] = [
 
 const key = 'pro-fit-data-v1';
 const legacyKeys = ['peakrep-data-v1', 'ironlog-data-v1'];
-export const emptyData = (): AppData => ({ programs: starterPrograms, history: [], profile: { name: '', photo: '', age: '', bodyWeight: '', targetWeight: '', height: '', goal: 'Build muscle' }, weightHistory: [], coachCheckIns: [], bodyScans: [] });
+export const emptyData = (): AppData => ({ programs: starterPrograms, history: [], profile: { name: '', photo: '', age: '', bodyWeight: '', targetWeight: '', height: '', goal: 'Build muscle', theme: 'dark' }, weightHistory: [], coachCheckIns: [], bodyScans: [] });
 export const loadData = (): AppData => { try { const raw = JSON.parse(localStorage.getItem(key) || legacyKeys.map((legacyKey) => localStorage.getItem(legacyKey)).find(Boolean) || '') as Partial<AppData>; const defaults = emptyData(); return { ...defaults, ...raw, profile: { ...defaults.profile, ...(raw.profile || {}) }, weightHistory: raw.weightHistory || [], coachCheckIns: raw.coachCheckIns || [], bodyScans: raw.bodyScans || [] }; } catch { return emptyData(); } };
 export const saveData = (data: AppData) => localStorage.setItem(key, JSON.stringify(data));
